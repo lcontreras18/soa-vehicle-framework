@@ -6,9 +6,6 @@
  * InteriorLightingService
  * -----------------------
  * Controls cabin lighting based on door lock state and door events.
- * - Subscribes to "door.lock.status" — turns on light when unlocked
- * - Subscribes to "door.open.event" — turns on courtesy light
- * - Publishes "interior.light.status"
  */
 class InteriorLightingService {
 public:
