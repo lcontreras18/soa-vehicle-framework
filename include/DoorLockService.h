@@ -7,10 +7,6 @@
  * DoorLockService
  * ---------------
  * Responsible for managing door lock states.
- * - Subscribes to "key.fob.command" to react to remote key events
- * - Publishes "door.lock.status" when lock state changes
- *
- * In a real BCM, this would interface with LIN/CAN actuators.
  */
 class DoorLockService {
 public:
