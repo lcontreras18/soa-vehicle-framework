@@ -5,8 +5,6 @@
 #include <vector>
 #include <any>
 #include <mutex>
-// Using recursive_mutex so services can publish from within subscriber callbacks
-// without deadlocking the registry
 #include <iostream>
 
 // A "Message" is just a topic + payload string
@@ -18,11 +16,6 @@ struct Message {
 // Callback type for subscribers
 using SubscriberCallback = std::function<void(const Message&)>;
 
-/**
- * ServiceRegistry — the heart of the SoA framework.
- * Services register here, publish events, and subscribe to topics.
- * Think of it as the "service mesh" or "signal bus" of the vehicle.
- */
 class ServiceRegistry {
 public:
     // Singleton: one registry for the whole system
@@ -31,21 +24,21 @@ public:
         return instance;
     }
 
-    // Register a named service (just logs it's alive)
+    // Register a named service
     void registerService(const std::string& serviceName) {
         std::lock_guard<std::recursive_mutex> lock(mutex_);
         services_[serviceName] = true;
         std::cout << "[Registry] Service registered: " << serviceName << "\n";
     }
 
-    // Subscribe to a topic with a callback
+    // Subscribe to a topic 
     void subscribe(const std::string& topic, const std::string& subscriberName, SubscriberCallback cb) {
         std::lock_guard<std::recursive_mutex> lock(mutex_);
         subscribers_[topic].push_back({subscriberName, cb});
         std::cout << "[Registry] '" << subscriberName << "' subscribed to topic: " << topic << "\n";
     }
 
-    // Publish a message to all subscribers of a topic
+    // Publish a message to all subscribers of a specific topic
     void publish(const Message& msg) {
         std::lock_guard<std::recursive_mutex> lock(mutex_);
         std::cout << "[Bus] Publishing topic='" << msg.topic << "' payload='" << msg.payload << "'\n";
