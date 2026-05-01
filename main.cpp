@@ -11,7 +11,7 @@ void separator(const std::string& label) {
 }
 
 int main() {
-    std::cout << "=== Karma SDV Body Control SoA Framework ===\n\n";
+    std::cout << "===  SDV Body Control SoA Framework ===\n\n";
 
     // --- Boot: instantiate all services ---
     // Each service self-registers and subscribes to its topics
