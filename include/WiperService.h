@@ -7,9 +7,6 @@
  * WiperService
  * ------------
  * Controls wiper speed based on rain sensor input.
- * - Subscribes to "rain.sensor" topic
- * - Publishes "wiper.status"
- *
  * Wiper modes: OFF, LOW, HIGH
  */
 class WiperService {
