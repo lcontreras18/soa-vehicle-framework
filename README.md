@@ -31,7 +31,7 @@ make
 ## Sample Output
 
 ```
-=== Karma SDV Body Control SoA Framework ===
+=== SDV Body Control SoA Framework ===
 
 [Registry] Service registered: DoorLockService
 [Registry] Service registered: InteriorLightingService
