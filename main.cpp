@@ -13,8 +13,6 @@ void separator(const std::string& label) {
 int main() {
     std::cout << "===  SDV Body Control SoA Framework ===\n\n";
 
-    // --- Boot: instantiate all services ---
-    // Each service self-registers and subscribes to its topics
     DoorLockService      doorLock;
     InteriorLightingService interiorLight;
     WiperService         wipers;
