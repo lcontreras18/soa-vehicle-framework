@@ -18,7 +18,7 @@ public:
 
         registry.registerService("DoorLockService");
 
-        // Subscribe to key fob commands
+        
         registry.subscribe(
             "key.fob.command",
             "DoorLockService",
@@ -27,8 +27,6 @@ public:
             }
         );
 
-        // Subscribe to vehicle speed
-        // Auto-lock above 10 mph
         registry.subscribe(
             "vehicle.speed",
             "DoorLockService",
@@ -37,7 +35,7 @@ public:
                 try {
                     float speed = std::stof(msg.payload);
 
-                    // Reject impossible negative speeds
+                    
                     if (speed < 0.0f) {
                         std::cout
                             << "[DoorLockService] Invalid vehicle speed: "
@@ -71,7 +69,7 @@ private:
 
     void setLocked(bool lock) {
 
-        // Don't publish if the lock state did not change
+        
         if (locked_ == lock) {
             return;
         }
