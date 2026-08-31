@@ -18,7 +18,6 @@ public:
 
         registry.registerService("InteriorLightingService");
 
-        // React to door lock changes
         registry.subscribe(
             "door.lock.status",
             "InteriorLightingService",
@@ -40,7 +39,7 @@ public:
             }
         );
 
-        // React to door open/close events
+        
         registry.subscribe(
             "door.open.event",
             "InteriorLightingService",
@@ -51,7 +50,7 @@ public:
                 }
                 else if (msg.payload == "CLOSED") {
 
-                    // Only turn the light off when the vehicle is locked
+                    
                     if (!doorUnlocked_) {
                         setLight(false, "Door closed and locked");
                     }
@@ -71,6 +70,10 @@ private:
 
     void setLight(bool on, const std::string& reason) {
 
+        if (lightOn_ == on) {
+            return;
+        }
+
         lightOn_ = on;
 
         std::string status = lightOn_ ? "ON" : "OFF";
@@ -82,7 +85,6 @@ private:
             << reason
             << ")\n";
 
-        // Publish lighting state so other services can react
         ServiceRegistry::getInstance().publish({
             "interior.light.status",
             status
